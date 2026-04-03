@@ -16,29 +16,29 @@ from os import environ, execle, system
 
 START_TIME = time.time()
 
-# 🔥 PREMIUM UI BUTTONS
+# 🔥 COMPACT BUTTON LAYOUT (NO GAP)
 main_buttons = [
 
-    # Top Row (Developer - Center Feel)
+    # Row 1 → Developer
     [
-        InlineKeyboardButton('👤 𝗗𝗘𝗩𝗘𝗟𝗢𝗣𝗘𝗥 👤', url='https://t.me/kingvj01')
+        InlineKeyboardButton('❣️ ᴅᴇᴠᴇʟᴏᴘᴇʀ ❣️', url='https://t.me/kingvj01')
     ],
 
-    # Row 2 (Equal Width Feel)
+    # Row 2 → Support + Update
     [
-        InlineKeyboardButton(' 🔍 𝗦𝗨𝗣𝗣𝗢𝗥𝗧 ', url='https://t.me/vj_bot_disscussion'),
-        InlineKeyboardButton(' 🤖 𝗨𝗣𝗗𝗔𝗧𝗘 ', url='https://t.me/vj_botz')
+        InlineKeyboardButton('🔍 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ', url='https://t.me/vj_bot_disscussion'),
+        InlineKeyboardButton('🤖 ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ', url='https://t.me/vj_botz')
     ],
 
-    # Row 3
+    # Row 3 → Help + About
     [
-        InlineKeyboardButton(' 👨‍💻 𝗛𝗘𝗟𝗣 ', callback_data='help'),
-        InlineKeyboardButton(' 💁 𝗔𝗕𝗢𝗨𝗧 ', callback_data='about')
+        InlineKeyboardButton('👨‍💻 ʜᴇʟᴘ', callback_data='help'),
+        InlineKeyboardButton('💁 ᴀʙᴏᴜᴛ', callback_data='about')
     ],
 
-    # Bottom Row
+    # Row 4 → Settings
     [
-        InlineKeyboardButton('⚙️ 𝗦𝗘𝗧𝗧𝗜𝗡𝗚𝗦', callback_data='settings#main')
+        InlineKeyboardButton('⚙ sᴇᴛᴛɪɴɢs', callback_data='settings#main')
     ]
 
 ]
@@ -67,12 +67,12 @@ async def restart(client, message):
 @Client.on_callback_query(filters.regex('help'))
 async def helpcb(bot, query):
     buttons = [
-        [InlineKeyboardButton('🤔 𝗛𝗢𝗪 𝗧𝗢 𝗨𝗦𝗘 ❓', callback_data='how_to_use')],
+        [InlineKeyboardButton('🤔 How To Use ❓', callback_data='how_to_use')],
         [
-            InlineKeyboardButton('✨ 𝗔𝗕𝗢𝗨𝗧', callback_data='about'),
-            InlineKeyboardButton('⚙ 𝗦𝗘𝗧𝗧𝗜𝗡𝗚𝗦', callback_data='settings#main')
+            InlineKeyboardButton('About ✨️', callback_data='about'),
+            InlineKeyboardButton('⚙ Settings', callback_data='settings#main')
         ],
-        [InlineKeyboardButton('⬅ 𝗕𝗔𝗖𝗞', callback_data='back')]
+        [InlineKeyboardButton('⬅ Back', callback_data='back')]
     ]
 
     await query.message.edit_text(
@@ -84,7 +84,7 @@ async def helpcb(bot, query):
 async def how_to_use(bot, query):
     await query.message.edit_text(
         text=Script.HOW_USE_TXT,
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⬅ 𝗕𝗔𝗖𝗞', callback_data='help')]]),
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⬅ Back', callback_data='help')]]),
         disable_web_page_preview=True
     )
 
@@ -99,8 +99,8 @@ async def back(bot, query):
 async def about(bot, query):
     buttons = [
         [
-            InlineKeyboardButton('⬅ 𝗕𝗔𝗖𝗞', callback_data='help'),
-            InlineKeyboardButton('📊 𝗦𝗧𝗔𝗧𝗦', callback_data='status')
+            InlineKeyboardButton('⬅ Back', callback_data='help'),
+            InlineKeyboardButton('Stats ✨️', callback_data='status')
         ]
     ]
 
@@ -118,8 +118,8 @@ async def status(bot, query):
 
     buttons = [
         [
-            InlineKeyboardButton('⬅ 𝗕𝗔𝗖𝗞', callback_data='help'),
-            InlineKeyboardButton('💻 𝗦𝗬𝗦𝗧𝗘𝗠', callback_data='systm_sts')
+            InlineKeyboardButton('⬅ Back', callback_data='help'),
+            InlineKeyboardButton('System Stats', callback_data='systm_sts')
         ]
     ]
 
@@ -147,11 +147,12 @@ async def system_status(bot, query):
 
     await query.message.edit_text(
         text=text,
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⬅ 𝗕𝗔𝗖𝗞', callback_data='help')]])
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⬅ Back', callback_data='help')]])
     )
 
 async def get_bot_uptime(start_time):
     seconds = int(time.time() - start_time)
     minutes = seconds // 60
     hours = minutes // 60
+
     return f"{hours%24}H {minutes%60}M {seconds%60}S"
